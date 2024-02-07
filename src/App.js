@@ -1,19 +1,17 @@
 import React from 'react';
-import {BrowserRouter as Router, Route } from 'react-router-dom';
-
-
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './view/login';
-import Teste from '../src/view/teste'
+import NovoUsuario from './view/usuario-novo';
+
 
 function App() {
   return (
-   <Router>
-
-   
-      <Route exact path='/' component={Teste} />
-
-   </Router>
+    <Router>
+      <Routes>
+        <Route path="/" Component={Login}></Route>
+        <Route path="/novousuario" Component={NovoUsuario}></Route>
+      </Routes>
+    </Router>
   );
 }
 
