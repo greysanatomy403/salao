@@ -1,0 +1,16 @@
+.navbar {
+    background-color: #8181F7;
+}
+
+.nav-item a{
+    color: #fff;
+    transition: .3s ease-in;
+}
+
+.nav-item a:hover{
+    color: #008B8B;
+}
+
+.span:not(.mdi) {
+    margin-bottom: 10px;
+}

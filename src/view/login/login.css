@@ -12,7 +12,7 @@
 }
 
 .btn-login:hover {
-    background-color: #BDBDBD;
+    background-color: #008B8B;
 }
 
 .opcoes-login a {
@@ -23,6 +23,6 @@
 }
 
 .opcoes-login a:hover {
-    color: #BDBDBD;
+    color: #008B8B;
 
 }

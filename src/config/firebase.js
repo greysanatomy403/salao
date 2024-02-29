@@ -2,9 +2,11 @@ import firebase from 'firebase/compat/app';
 import'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyAtV5NB6t1P4V62JMM6t5kyJl7uAQ2C92I",
     authDomain: "new-look-9c93f.firebaseapp.com",
+    databaseURL: "https://new-look-9c93f-default-rtdb.firebaseio.com",
     projectId: "new-look-9c93f",
     storageBucket: "new-look-9c93f.appspot.com",
     messagingSenderId: "541799999291",
