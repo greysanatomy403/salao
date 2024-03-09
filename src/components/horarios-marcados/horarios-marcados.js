@@ -37,12 +37,12 @@ function HorarioMarcado({match}){
         <Navbar/>
         
         <div className='row p-5'>
-            <h2 className='mx-auto pb-2'>Clientes</h2>
+            <h2 className='mx-auto pb-2'>CLIENTES</h2>
         <input onChange={(e) => setPesquisa(e.target.value)} type='text' className='form-control text-center' placeholder='Pesquisar Serviço pelo titulo'></input>
         </div>
         
         <div className='row p-3'>
-        {salao.map(item => <TipoServico key={item.id} id={item.id} cliente={item.cliente} descricao={item.descricao} detalhes={item.detalhes} visualizacoes={item.visualizacoes}/>) }
+        {salao.map(item => <TipoServico key={item.id} id={item.id} cliente={item.cliente} servico={item.servico} tipo={item.tipo} descricao={item.descricao} profissional={item.profissional} data={item.data} hora= {item.hora}detalhes={item.detalhes} visualizacoes={item.visualizacoes}/>) }
         
         </div>
         </>
