@@ -17,14 +17,13 @@ function Navbar(){
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
 
-              <li className="nav-item"><Link className="nav-link ml-2"  to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link ml-2"  to="/">Agendamentos</Link></li>
               
               {
                   useSelector(state => state.usuarioLogado) > 0 ?
               
               <>
               <li className="nav-item"><Link className="nav-link"  to="/servicosalao">Marcar Horario</Link></li>
-              <li className="nav-item"><Link className="nav-link"  to="/horariosmarcados">Horarios Marcados</Link></li>
               <li className="nav-item"><Link className="nav-link"  onClick={() => dispatch ({type: 'LOG_OUT'}) }>Sair</Link></li>
               
               </>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import store from '../src/store/';
+import { store, persistor } from '../src/store/';
 import { Provider } from 'react-redux';
 import Detalhes from './view/Salao-detalhes/detalhes';
+import { PersistGate } from 'redux-persist/integration/react';
 
 /*Paginas*/
 import Login from './view/login';
@@ -16,6 +17,7 @@ import ServicoSalao from './view/servico-salao';
 function App() {
   return (
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <Router>
       <Routes>
         <Route exact path='/' Component={Home}></Route>
@@ -30,6 +32,7 @@ function App() {
         
       </Routes>
     </Router>
+    </PersistGate>
     </Provider>
   );
 }

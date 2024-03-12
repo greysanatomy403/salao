@@ -1,24 +1,32 @@
 import React, {useState, useEffect} from "react";
 import './detalhes.css';
-import { Link} from 'react-router-dom';
+import { Link, useParams, Navigate} from 'react-router-dom';
 import firebase from '../../config/firebase';
 import { useSelector } from 'react-redux';
 import Navbar from "../../components/navbar";
 
 
-function Detalhes(props) {
+function Detalhes() {
 
 const [salao, setSalao ] = useState({});
 const [urlImg, setUrlImg ] = useState({});
 const usuarioLogado = useSelector(state => state.usuarioEmail);
-const[carregando, setCarregando] = useState(1);
+const [carregando, setCarregando] = useState(1);
+const [excluido, setExcluido] = useState(0);
+const { id } = useParams();
 
+function remover () {
+    firebase.firestore().collection('salao').doc(id).delete().then(() => {
+    setExcluido(1);
+
+    })
+}
 
     useEffect(() => {
         if(carregando) {
-    firebase.firestore().collection('salao').doc(props.match.params.id).get().then(resultado => {
+    firebase.firestore().collection('salao').doc(id).get().then(resultado => {
    setSalao(resultado.data())
-   firebase.firestore().collection('salao').doc(props.match.params.id).update('visualizacoes', resultado.data().visualizacoes + 1)
+   firebase.firestore().collection('salao').doc(id).update('visualizacoes', resultado.data().visualizacoes + 1)
    firebase.storage().ref(`imagens/${resultado.data().foto}`).getDownloadURL().then(url => {
     setUrlImg(url)
     setCarregando(0);
@@ -32,7 +40,12 @@ const[carregando, setCarregando] = useState(1);
 
     return (
     <>
+
+     
     <Navbar />
+
+    {excluido ? <Navigate to='/' /> : null } 
+
     <div className="container-fluid">
     {
 
@@ -83,12 +96,19 @@ const[carregando, setCarregando] = useState(1);
         </div>       
 
          {
-             usuarioLogado == salao.usuario ?
-             <Link to={'/editarservico/${props.match.params.id}'} className="btn-editar"><i className="fas fa-pen-square fa-3x"></i></Link>
+             usuarioLogado === salao.usuario ?
+             <Link to={`/editarservico/${id}`} className="btn-editar"><i className="fas fa-pen-square fa-3x"></i></Link>
              : ''
          }
+
+        {
+        usuarioLogado === salao.usuario ? <button onClick={remover} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">Remover Evento</button>
+        : null
+        }
         
     </div>
+
+     
     }
     </div>
     </>
