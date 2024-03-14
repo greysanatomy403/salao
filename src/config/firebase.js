@@ -5,14 +5,16 @@ import 'firebase/compat/storage';
 
  
 const firebaseConfig = {
-    apiKey: "AIzaSyAtV5NB6t1P4V62JMM6t5kyJl7uAQ2C92I",
-    authDomain: "new-look-9c93f.firebaseapp.com",
-    databaseURL: "https://new-look-9c93f-default-rtdb.firebaseio.com",
-    projectId: "new-look-9c93f",
-    storageBucket: "new-look-9c93f.appspot.com",
-    messagingSenderId: "541799999291",
-    appId: "1:541799999291:web:a1494a6a03b7ace2b0391e"
-  };
+  apiKey: "AIzaSyAcPJBYNrz6f1RDybmRGk2ya06gjVY-rag",
+  authDomain: "salao-new-look.firebaseapp.com",
+  projectId: "salao-new-look",
+  databaseURL: "//salao-new-look-default-rtdb.firebaseio.com/",
+  storageBucket: "salao-new-look.appspot.com",
+  messagingSenderId: "79050567409",
+  appId: "1:79050567409:web:c4ba9c23838a77b5b4c350",
+  measurementId: "G-NWWZ6XXMGB"
+};
+
   
   // Initialize Firebase
   export default firebase.initializeApp(firebaseConfig);

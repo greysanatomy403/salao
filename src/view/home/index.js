@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import './home.css';
-import {Link } from 'react-router-dom';
+import {Link, useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/';
 import { useSelector } from 'react-redux';
 import firebase from '../../config/firebase';
 import TipoServico from '../../components/tipo-servico/tipo-servico'
 
 
-function Home(match){
+function Home(){
 
     const [salao, setSalao] = useState([]);
     const [pesquisa, setPesquisa] = useState('');
     let listaservicos = [];
 
+    
+
     useEffect(() => {
+            
             firebase.firestore().collection('salao').get().then(async (resultado) => {
-                await resultado.docs.forEach(doc => {
-                    if(doc.data().cliente.indexOf(pesquisa) >= 0)
-                        {
-                        listaservicos.push({  
-                        id: doc.id,
-                        ...doc.data()
-                    })
-                }
-            })
-                
-                setSalao(listaservicos);
-          });
+                await resultado.docs.forEach(doc => {                  
+                   listaservicos.push({
+                       id: doc.id,
+                       ...doc.data()
+                   })
+               })
+       
+               setSalao(listaservicos);
+           
+        })     
+    
     });
 
     return(
@@ -35,8 +37,8 @@ function Home(match){
         
         <div className='row p-5'>
             <h2 className='mx-auto pb-2'>CLIENTES</h2>
-            <img src='https://www.canva.com/design/DAF8y8XYJQ4/3j1bRKSxwGTtp8mfK94MUA/edit'></img>
-        <input onChange={(e) => setPesquisa(e.target.value)} type='text' className='form-control text-center' placeholder='Pesquisar Serviço pelo titulo'></input>
+            <img src=''></img>
+        <input onChange={(e) => setPesquisa(e.target.value)} type='text' className='form-control text-center' placeholder='Pesquisar pelo cliente'></input>
         </div>
         
         <div className='row p-3'>

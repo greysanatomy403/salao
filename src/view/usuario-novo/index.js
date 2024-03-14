@@ -28,9 +28,9 @@ function NovoUsuario () {
        firebase.auth().createUserWithEmailAndPassword(email,senha).then(resultado => {
         setCarregando(0);
         setMsgTipo('sucesso')
-       }).catch(erro => {
-        setCarregando(0);
-        setMsgTipo('erro')
+       }).catch(erro => { 
+        console.log(JSON.stringify(erro))
+       
         switch(erro.message)
             {
             case 'Password should be at least 6 characteres':
@@ -57,7 +57,7 @@ function NovoUsuario () {
         <form className= "text-center form-login mx-auto mt-5">
             <h1 className="h3 mb-3 text-black font-weight-bold">Cadastro</h1>
 
-            <input onChange={(e) => setEmail (e.target.value) } type="Nome Completo" className="form-control my-2" placeholder="Nome Completo" />
+            
             <input onChange={(e) => setEmail (e.target.value) } type="email" className="form-control my-2" placeholder="Email" />
             <input onChange={(e) => setSenha (e.target.value) } type="password" className="form-control my-2" placeholder="Senha" />
             

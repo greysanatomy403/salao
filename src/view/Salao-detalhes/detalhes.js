@@ -102,7 +102,7 @@ function remover () {
          }
 
         {
-        usuarioLogado === salao.usuario ? <button onClick={remover} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">Remover Evento</button>
+        usuarioLogado === salao.usuario ? <button onClick={remover} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">Remover Horario</button>
         : null
         }
         
