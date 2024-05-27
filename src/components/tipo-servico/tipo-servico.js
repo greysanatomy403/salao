@@ -12,6 +12,7 @@ function TipoServico({id, img, cliente, descricao, servico, tipo, profissional, 
         firebase.storage().ref(`imagens/${img}`).getDownloadURL().then(url => setUrlImagem(url));
      }, [urlImagem]);
 
+
      
      return(
         <div className='col-md-3 col-sm-12'>

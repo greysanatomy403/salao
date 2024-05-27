@@ -26,3 +26,8 @@
     color: #008B8B;
 
 }
+
+.logo {
+    width: 170px; /* Defina o tamanho desejado */
+    height: auto; /* Para manter a proporção da imagem */
+  }
