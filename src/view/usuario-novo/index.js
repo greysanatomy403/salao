@@ -2,17 +2,18 @@ import React, {useState} from 'react';
 import firebase from '../../config/firebase';
 import 'firebase/auth';
 import Navbar from '../../components/navbar';
-
 import './usuario-novo.css';
 
 function NovoUsuario () {
 
-
+   
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
     const [msgTipo, setMsgTipo] = useState();
     const [msg, setMsg] = useState();
     const [carregando, setCarregando] = useState();
+
+   
 
     function cadastrar () {
         setCarregando(1);
@@ -72,6 +73,9 @@ function NovoUsuario () {
                  {msgTipo === 'erro' && <span><strong>Ops!</strong> {msg} </span>}
                 
             </div>
+
+            
+
         </form>
     </div>
     </>

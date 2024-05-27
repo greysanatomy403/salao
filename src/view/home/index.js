@@ -18,11 +18,14 @@ function Home(){
     useEffect(() => {
             
             firebase.firestore().collection('salao').get().then(async (resultado) => {
-                await resultado.docs.forEach(doc => {                  
+                await resultado.docs.forEach(doc => {  
+                    if(doc.data().cliente.indexOf(pesquisa) >= 0) 
+                    {             
                    listaservicos.push({
                        id: doc.id,
                        ...doc.data()
                    })
+                }  
                })
        
                setSalao(listaservicos);
@@ -37,7 +40,7 @@ function Home(){
         
         <div className='row p-5'>
             <h2 className='mx-auto pb-2'>CLIENTES</h2>
-            <img src=''></img>
+            
         <input onChange={(e) => setPesquisa(e.target.value)} type='text' className='form-control text-center' placeholder='Pesquisar pelo cliente'></input>
         </div>
         
