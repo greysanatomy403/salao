@@ -5,6 +5,22 @@ import firebase from '../../config/firebase';
 import { useSelector } from 'react-redux';
 import Navbar from "../../components/navbar";
 
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet} from '@react-pdf/renderer';
+
+import * as XLSX from 'xlsx';
+
+
+const styles = StyleSheet.create({
+    page: {
+        flexDirection: 'row',
+        backgroundColor: '#e4e4e4'
+    },
+    section: {
+        margin: 10,
+        padding: 10,
+        flexGrow:1
+    }
+});
 
 function Detalhes() {
 
@@ -37,6 +53,13 @@ function remover () {
 }
 
 },[])
+
+const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet([salao]);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Detalhes");
+    XLSX.writeFile(workbook, "detalhes.xlsx");
+};
 
     return (
     <>
@@ -97,22 +120,44 @@ function remover () {
 
          {
              usuarioLogado === salao.usuario ?
+             <>
+        
+             
              <Link to={`/editarservico/${id}`} className="btn-editar"><i className="fas fa-pen-square fa-3x"></i></Link>
+             <button onClick={exportToExcel} type="button" className="btn btn-lg mt-3 mb-1 btn-cadastro" style={{ marginRight: '10px' }} >Exportar para Excel</button>
+            </>
              : ''
          }
 
         {
-        usuarioLogado === salao.usuario ? <button onClick={remover} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">Remover Horario</button>
+        usuarioLogado === salao.usuario ? <button onClick={remover} type="button" className="btn btn-lg mt-3 mb-1 btn-cadastro" style={{ marginRight: '10px' }}>Remover Horario</button>
         : null
         }
-        
-    </div>
 
-     
+        <PDFDownloadLink document={<PDFDocument salao={salao} />} fileName="detalhes.pdf">
+            {({blob, url, loading, error }) =>
+            loading ? 'carregando documento...' : <button className="btn btn-lg mt-3 mb-1 btn-cadastro btn-export" >Baixar PDF</button>
+          }
+          </PDFDownloadLink> 
+    </div>
     }
     </div>
     </>
     )
 }
+
+const PDFDocument = ({ salao }) => (
+    <Document>
+        <Page style={styles.page}>
+            <View style={styles.section}>
+                <Text>{salao.cliente}</Text>
+                <Text>{salao.tipo}</Text>
+                <Text>{salao.data}</Text>
+                <Text>{salao.hora}</Text>
+                <Text>{salao.detalhes}</Text>
+            </View>
+        </Page>
+    </Document>
+)
 
 export default Detalhes;

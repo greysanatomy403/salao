@@ -30,6 +30,7 @@ function App() {
         <Route path='/detalhes/:id' Component={Detalhes}></Route>
         <Route path='/editarservico/:id' Component={ServicoSalao}></Route>
         
+        
       </Routes>
     </Router>
     </PersistGate>

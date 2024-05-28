@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import firebase from '../../config/firebase';
 import './tipo-servico.css';
-
+import { createRoot } from 'react-dom/client';
 
 function TipoServico({id, img, cliente, descricao, servico, tipo, profissional, data, hora, detalhes, visualizacoes}){
 
@@ -11,6 +11,7 @@ function TipoServico({id, img, cliente, descricao, servico, tipo, profissional, 
      useEffect(() => {
         firebase.storage().ref(`imagens/${img}`).getDownloadURL().then(url => setUrlImagem(url));
      }, [urlImagem]);
+
 
      
      return(
