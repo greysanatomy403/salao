@@ -11,6 +11,7 @@ import NovoUsuario from './view/usuario-novo/';
 import Home from './view/home/';
 import UsuarioRecuperarSenha from './view/usuario-recuperar-senha';
 import ServicoSalao from './view/servico-salao';
+import QuemSomos from './view/quem-somos';
 
 
 
@@ -20,17 +21,14 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
     <Router>
       <Routes>
-        <Route exact path='/' Component={Home}></Route>
-        
-        <Route path='' Component={Home}></Route>
-        <Route exact path='/novousuario' Component={NovoUsuario}></Route>
-        <Route exact path='/login' Component={Login}></Route>
-        <Route exact path='/usuariorecuperarsenha' Component={UsuarioRecuperarSenha}></Route>
-        <Route exact path='/servicosalao' Component={ServicoSalao}></Route>
-        <Route path='/detalhes/:id' Component={Detalhes}></Route>
-        <Route path='/editarservico/:id' Component={ServicoSalao}></Route>
-        
-        
+        <Route path='/' element={<Home />} />
+        <Route path='/novousuario' element={<NovoUsuario />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/usuariorecuperarsenha' element={<UsuarioRecuperarSenha />} />
+        <Route path='/servicosalao' element={< ServicoSalao />} />
+        <Route path='/detalhes/:id' element={< Detalhes />} />
+        <Route path='/editarservico/:id' element={<ServicoSalao />} />
+        <Route path='/quemsomos' element={<QuemSomos />} />
       </Routes>
     </Router>
     </PersistGate>

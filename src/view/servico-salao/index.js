@@ -3,8 +3,10 @@ import {useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './servico-salao.css';
 import Navbar from '../../components/navbar/';
-
 import firebase from '../../config/firebase';
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 function ServicoSalao(props) {
@@ -12,10 +14,13 @@ function ServicoSalao(props) {
     const [carregando, setCarregando] = useState();
     const [msgTipo, setMsgTipo] = useState();
     const [cliente, setCliente] = useState();
+    const [endereco, setEndereco] = useState();
+    const [cidade, setCidade] = useState();
+    const [bairro, setBairro] = useState();
     const [tipo, setTipo] = useState();
     const [detalhes, setDetalhes] = useState();
     const [profissional, setProfissional] = useState();
-    const [data, setData] = useState();
+    const [selectedDate, setSelectedDate] = useState();
     const [hora, setHora] = useState();
     const [fotoAtual, setFotoAtual] = useState();
     const [fotoNova, setFotoNova] = useState();
@@ -30,15 +35,18 @@ function ServicoSalao(props) {
         if(id){
           firebase.firestore().collection('salao').doc(id).get().then(resultado => {
               setCliente(resultado.data().cliente)
+              setEndereco(resultado.data().endereco)
+              setCidade(resultado.data().cidade)
+              setBairro(resultado.data().bairro)
               setTipo(resultado.data().tipo)
               setDetalhes(resultado.data().detalhes)
               setProfissional(resultado.data().profissional)
-              setData(resultado.data().data)
+              setSelectedDate(resultado.data().data ? new Date(resultado.data().data) : null);
               setHora(resultado.data().hora)
               setFotoAtual(resultado.data().foto)
           })
         }
-}, [carregando])
+}, [id])
 
 function atualizar () {   
         setMsgTipo(null);
@@ -49,9 +57,12 @@ function atualizar () {
 
             db.collection('salao').doc(id).update ({
                 cliente: cliente,
+                endereco: endereco,
+                cidade: cidade,
+                bairro: bairro,
                 tipo: tipo,
                 detalhes: detalhes,
-                data: data,
+                data: selectedDate,
                 hora: hora,
                 profissional: profissional,
                 foto: fotoNova ? fotoNova.name : fotoAtual
@@ -74,9 +85,12 @@ function atualizar () {
         storage.ref(`imagens/${fotoNova.name}`).put(fotoNova).then(() => {
             db.collection('salao').add ({
                 cliente: cliente,
+                endereco: endereco,
+                cidade: cidade,
+                bairro: bairro,
                 tipo: tipo,
                 detalhes: detalhes,
-                data: data,
+                data: selectedDate,
                 hora: hora,
                 profissional: profissional,
                 foto: fotoNova.name,
@@ -106,51 +120,71 @@ function atualizar () {
             </div>
 
             <form>
-            <div className='form-group'>
+            <div className='form-group row '>
+            <div className='col-md-4'>
                 <label>Cliente</label>
                 <input onChange={(e) => setCliente(e.target.value) } type='text' className='form-control' value={cliente && cliente}/>
             </div>
+            </div>
 
-            <div className='form-group'>
+            <div className='form-group row'>
+            <div className='col-md-4'>
+                <label>Endereço/N°</label>
+                <input onChange={(e) => setEndereco(e.target.value) } type='text' className='form-control' value={endereco && endereco}/>
+            </div>
+            </div>
+
+            <div className='form-group row'>
+                <div className='col-md-2'>
+                <label>Cidade</label>
+                <input onChange={(e) => setCidade(e.target.value) } type='text' className='form-control' value={cidade && cidade}/>
+            </div>
+            <div className='col-md-2'>
+                <label>Bairro</label>
+                <input onChange={(e) => setBairro(e.target.value) } type='text' className='form-control' value={bairro && bairro}/>
+            </div>
+            </div>
+
+            <div className='form-group row'>
+            <div className='col-md-4'>
                 <label>Tipo do serviço</label>
                 <select onChange={(e) => setTipo(e.target.value) } className='form-control' value={tipo && tipo}>
                 <option disabled selected value>-- Selecione um serviço --</option>
-                <option>Corte de Cabelo</option>
-                <option>Tintura</option>
-                <option>Tratamento capilar</option>
-                <option>Alisamento</option>
-                <option>Progressiva</option>
-                <option>Mechas</option>
-                <option>Luzes</option>
-                <option>Reflexos</option>
-                <option>Manicure</option>
-                <option>Pedicure</option>
-                <option>Manicure e Pedicure</option>
+                <option>Lavagem ecológica</option>
+                <option>Lavagem a seco de bancos</option>
+                <option>Higienização Interna</option>
+                <option>Higienização e hidratação de couro</option>
+                <option>Poliment Tecnico</option>
+                <option>Espelhamento 3M</option>
+                <option>Vitrificação</option>
+                <option>Descontaminação de pintura</option>
+                <option>Cristalização de vidro</option>
+                <option>Remoção de chuva ácida</option>
+                <option>Lavagem a seco de motor</option>
+                <option>Revitalização de plástico</option>
+                <option>Polimento de farol</option>
+                <option>Limpeza de teto</option>
                 </select>
             </div>
-
-            <div className='form-group'>
-                <label>Descrição do serviço:</label>
+            </div>
+            <div className='form-group row'>
+            <div className='col-md-4'>
+                <label>Modelo do veículo:</label>
+                
                 <textarea onChange={(e) => setDetalhes(e.target.value) } className='form-control' rows="3" value={detalhes && detalhes} />
             </div>
-
-            <div className='form-group'>
-                <label>Profissional</label>
-                <select onChange={(e) => setProfissional(e.target.value) } className='form-control' value={profissional && profissional}>
-                <option disabled selected value>-- Selecione um serviço --</option>
-                <option>Romeu Felipe </option>
-                <option>Letícia Rigolim</option>
-                <option>Washington Nunnes</option>
-                <option>Charlem Strelow</option>
-                <option>Sônia Lopes</option>
-               
-                </select>
             </div>
             
             <div className='form-group row'>
                 <div className='col-3'>
                 <label>Data:</label>
-                <input onChange={(e) => setData(e.target.value) } type='date' className='form-control' value={data && data}/>
+                <DatePicker
+                                selected={selectedDate} // Estado selecionado
+                                onChange={(date) => setSelectedDate(date)} // Atualiza o estado quando a data é selecionada
+                                className='form-control'
+                                dateFormat="dd/MM/yyyy" // Formato da data
+                                placeholderText="Selecione uma data" // Texto de placeholder
+                            />
             </div>
             
             </div>

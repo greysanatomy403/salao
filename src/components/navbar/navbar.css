@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #8181F7;
+    background-color: black;
 }
 
 .nav-item a{
@@ -8,7 +8,7 @@
 }
 
 .nav-item a:hover{
-    color: #008B8B;
+    color:  #daa520;
 }
 
 .span:not(.mdi) {

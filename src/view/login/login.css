@@ -2,17 +2,17 @@
     width: 100%;
     padding: 15%;
     margin: auto;
-    background-color: #8181F7;
+    background-color: black;
     height: 100vh;
 }
 
 .btn-login {
     background-color: #fff;
-    color:#8181F7;
+    color:black;
 }
 
 .btn-login:hover {
-    background-color: #008B8B;
+    background-color: #daa520;
 }
 
 .opcoes-login a {
@@ -23,11 +23,25 @@
 }
 
 .opcoes-login a:hover {
-    color: #008B8B;
+    color: #daa520;
 
 }
 
 .logo {
-    width: 170px; /* Defina o tamanho desejado */
+    width: 300px; /* Defina o tamanho desejado */
     height: auto; /* Para manter a proporção da imagem */
   }
+
+.contact-info {
+    position: absolute; /* Para posicionar no topo da pagina */
+    top: 10px; /* Distancia do topo */
+    right: 20px; /* Distancia da borda direitac*/
+    z-index: 1000; /* Para garantir que fique acima de outros elementos */
+    font-size: 14px; /* tamanho da fonte para as informações de contato */
+    color: #daa520;
+}
+
+
+.phone, .email {
+    margin-left: 10px; /* Espaço entre telefone  email */
+}

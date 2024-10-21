@@ -1,9 +1,23 @@
 .btn-cadastro{
-    background-color:#8181F7 ;
+    background-color:#daa520 ;
     color: #fff;
 }
 
 .btn-cadastro:hover{
     background-color: #008B8B;
     color: #fff;
+}
+
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.cliente-input {
+    width: 200px;
+    margin-bottom: 0.5rem;
 }

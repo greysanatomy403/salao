@@ -17,6 +17,8 @@ function Navbar(){
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
 
+            <li className="nav-item"><Link className="nav-link ml-2"  to="/quemsomos">Quem Somos</Link></li>
+
               <li className="nav-item"><Link className="nav-link ml-2"  to="/">Agendamentos</Link></li>
               
               {

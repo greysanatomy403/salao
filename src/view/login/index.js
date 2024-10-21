@@ -7,7 +7,7 @@ import firebase from '../../config/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 
 
-import logo from '../../public/imagem3.png';
+import logo from '../../public/vinhal.png';
 
 function Login() {
 
@@ -59,13 +59,21 @@ function Login() {
     return (
         <div className="login-content d-flex align-items-center">
                 {useSelector(state => state.usuarioLogado) > 0 ? <Navigate to='/' /> : null }
+
+
+                {/* Informações de contato */ }
+       <div className='contact-info text-#daa520 text-right'>
+    <span className='phone'>Telefone: (31) 98621-3021</span>
+    <span className='email'>  |  Email: contato@exemplo.com</span>
+       </div>
+
                 
                 <form className="form-signin mx-auto">
                 <div className="text-center mb-4">
                
               
                 <img className="logo" src={logo} alt="Logo do Salão New-Look" />
-                <h1 className="h3 mb-3 font-weight-normal text-white font-weight-bold ">Login</h1>
+                <h1 className="h3 mb-3 font-weight-normal text-white font-weight-bold "></h1>
                 </div>
 
                 <input onChange={(e) => setEmail(e.target.value)} type="email" id="inputEmail" class="form-control my-2" placeholder="Email" />
